@@ -1,16 +1,33 @@
 <?php
+include_once __DIR__ . '/component/header.php';
 
 use App\Service\PDOService;
+use App\Models\Movie;
 
-include_once __DIR__ . '/vendor/autoload.php';
 ?>
 
 <?php
 
-$listMovie = new PDOService;
+$dataMovie = new PDOService;
+$listMovie = [];
 
-dump($listMovie);
+dump($dataMovie);
 
-dump($listMovie->findAll());
+dump($dataMovie->findAll());
+
+foreach ($dataMovie->findAll() as $key => $value) {
+    $newMovie = new Movie();
+    $newMovie->setName($value['name_movie']);
+    $newMovie->setReleaseDate(new DateTime($value['release_date_movie']));
+
+    $listMovie[] = $newMovie;
+}
 
 ?>
+
+<h1>Mes films</h1>
+<ul>
+    <?php foreach ($listMovie as $item) : ?>
+        <li><?= $item->getName() ?> sortie le <?= $item->getReleaseDate()->format('d/m/Y') ?></li>
+    <?php endforeach; ?>
+</ul>
