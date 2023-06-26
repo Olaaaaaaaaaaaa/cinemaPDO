@@ -1,18 +1,16 @@
 <?php
-include_once __DIR__ . '/../vendor/autoload.php';
+
+use App\Service\PDOService;
+
+include_once __DIR__ . '/vendor/autoload.php';
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
+<?php
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+$listMovie = new PDOService;
 
-<body>
+dump($listMovie);
 
-</body>
+dump($listMovie->findAll());
 
-</html>
+?>
