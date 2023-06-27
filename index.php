@@ -17,7 +17,7 @@ dump($dataMovie);
 
 dump($test->findFirst());
 
-dump($test->findById(6));
+dump($test->findAllMovie());
 
 // foreach ($dataMovie->findAll() as $key => $value) {
 //     $newMovie = new Movie();

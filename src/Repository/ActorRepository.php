@@ -19,7 +19,7 @@ class ActorRepository
     }
 
 
-    public function findAllMovie()
+    public function findAll()
     {
         return $this->pdoService->getPDO()->query($this->selectAll)->fetchAll();
     }
@@ -28,7 +28,7 @@ class ActorRepository
         return $this->pdoService->getPDO()->query($this->selectAll)->fetchObject(Actor::class);
     }
 
-    public function findAllMovieModel(): array
+    public function findAllModel(): array
     {
         return $this->pdoService->getPDO()->query($this->selectAll)->fetchAll(PDO::FETCH_CLASS, Actor::class);
     }
