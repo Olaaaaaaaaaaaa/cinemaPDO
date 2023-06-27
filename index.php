@@ -2,18 +2,19 @@
 include_once __DIR__ . '/component/header.php';
 
 use App\Service\PDOService;
-use App\Models\Movie;
+use App\Repository\MovieRepository;
 
 ?>
 
 <?php
 
 $dataMovie = new PDOService;
+$test = new MovieRepository;
 // $listMovie = [];
 
 dump($dataMovie);
 
-dump($dataMovie->findAll());
+dump($test->findFirst());
 
 // foreach ($dataMovie->findAll() as $key => $value) {
 //     $newMovie = new Movie();
