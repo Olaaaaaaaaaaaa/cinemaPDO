@@ -32,4 +32,12 @@ class MovieRepository
     {
         return $this->pdoService->getPDO()->query($this->selectAll)->fetchAll(PDO::FETCH_CLASS, Movie::class);
     }
+
+    public function findById(?int $id = null): Movie|bool
+    {
+        $query = $this->pdoService->getPDO()->prepare("SELECT * FROM movie WHERE id = ?");
+        $query->bindValue(1, $id);
+        $query->execute();
+        return $query->fetchObject(Movie::class);
+    }
 }

@@ -1,6 +1,7 @@
 <?php
 include_once __DIR__ . '/component/header.php';
 
+use App\Repository\ActorRepository;
 use App\Service\PDOService;
 use App\Repository\MovieRepository;
 
@@ -9,12 +10,14 @@ use App\Repository\MovieRepository;
 <?php
 
 $dataMovie = new PDOService;
-$test = new MovieRepository;
+$test = new ActorRepository;
 // $listMovie = [];
 
 dump($dataMovie);
 
 dump($test->findFirst());
+
+dump($test->findById(6));
 
 // foreach ($dataMovie->findAll() as $key => $value) {
 //     $newMovie = new Movie();
