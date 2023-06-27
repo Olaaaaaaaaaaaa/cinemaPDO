@@ -4,31 +4,32 @@ namespace App\Models;
 
 use Datetime;
 
+#[\AllowDynamicProperties]
 class Movie
 {
-    private string $name;
+    private string $title;
     private Datetime $releaseDate;
 
-    public function getName(): string
+    public function __getTitle(): string
     {
-        return $this->name;
+        return $this->title;
     }
     /**
-     * @param string $name
+     * @param string $title
      */
-    public function setName(string $name): void
+    public function __setTitle(string $title): void
     {
-        $this->name = $name;
+        $this->title = $title;
     }
 
-    public function getReleaseDate(): Datetime
+    public function __getReleaseDate(): Datetime
     {
         return $this->releaseDate;
     }
     /**
      * @param Datetime $releaseDate
      */
-    public function setReleaseDate(Datetime $releaseDate): void
+    public function __setReleaseDate(Datetime $releaseDate): void
     {
         $this->releaseDate = $releaseDate;
     }

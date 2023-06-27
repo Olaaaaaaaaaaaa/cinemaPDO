@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use PDO;
+use App\Models\Movie;
 
 class PDOService
 {
@@ -17,8 +18,17 @@ class PDOService
         $this->pdo = new PDO($this->dsn, $this->user, $this->pwd);
     }
 
-    public function findAll()
+    // public function findAll()
+    // {
+    //     return $this->pdo->query("SELECT * FROM movie")->fetchAll();
+    // }
+    // public function findAll(): Movie
+    // {
+    //     return $this->pdo->query("SELECT * FROM movie")->fetchObject(Movie::class);
+    // }
+    public function findAll(): array
     {
-        return $this->pdo->query("SELECT * FROM movie")->fetchAll();
+        $query = $this->pdo->query("SELECT * FROM movie");
+        return $query->fetchAll(PDO::FETCH_CLASS, Movie::class);
     }
 }
