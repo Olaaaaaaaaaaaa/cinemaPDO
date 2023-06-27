@@ -17,7 +17,7 @@ dump($dataMovie);
 
 dump($test->findFirst());
 
-dump($test->findAllMovie());
+dump($test->findAllActor());
 
 // foreach ($dataMovie->findAll() as $key => $value) {
 //     $newMovie = new Movie();
