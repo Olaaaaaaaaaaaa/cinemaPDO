@@ -6,6 +6,7 @@ use App\Models\Actor;
 use App\Service\PDOService;
 use PDO;
 
+#[\AllowDynamicProperties]
 class ActorRepository
 {
     private PDOService $PDOService;
@@ -28,5 +29,24 @@ class ActorRepository
         $query->execute();
 
         return $query->fetchObject(Actor::class);
+    }
+
+    public function insertActor(Actor $actor): Actor
+    {
+        $query = $this->PDOService->getPDO()->prepare('INSERT INTO actor VALUE (null,:first_name,:last_name)');
+        $firstName = $actor->getFirstName();
+        $lastName = $actor->getLastName();
+        $query->bindParam(':first_name', $firstName);
+        $query->bindParam(':last_name', $lastName);
+        $query->execute();
+        return $actor;
+    }
+
+    public function deleteActor(Actor $actor): void
+    {
+        $query = $this->PDOService->getPDO()->prepare('DELETE FROM actor WHERE id = :idActor');
+        $idActor = $actor->getId();
+        $query->bindParam(':idActor', $idActor);
+        $query->execute();
     }
 }

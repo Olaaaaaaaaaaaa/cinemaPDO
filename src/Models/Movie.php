@@ -2,15 +2,18 @@
 
 namespace App\Models;
 
-use Datetime;
+use DateTime;
 
 #[\AllowDynamicProperties]
 class Movie
 {
     private int $id;
+
     private string $title;
-    private Datetime $releaseDate;
-    private array $actors;
+
+    private DateTime $releaseDate;
+
+    private array $actors = [];
 
     public function getId(): int
     {
@@ -21,24 +24,30 @@ class Movie
     {
         return $this->title;
     }
-    /**
-     * @param string $title
-     */
+
     public function setTitle(string $title): void
     {
         $this->title = $title;
     }
 
-    public function getReleaseDate(): Datetime
+    public function getReleaseDate(): DateTime
     {
         return $this->releaseDate;
     }
-    /**
-     * @param Datetime $releaseDate
-     */
-    public function setReleaseDate(Datetime $releaseDate): void
+
+    public function setReleaseDate(DateTime $releaseDate): void
     {
         $this->releaseDate = $releaseDate;
+    }
+
+    public function getActors(): array
+    {
+        return $this->actors;
+    }
+
+    public function setActors(array $actors): void
+    {
+        $this->actors = $actors;
     }
 
     public function addActor(Actor $actor): void
@@ -48,8 +57,8 @@ class Movie
 
     public function removeActor(Actor $actor): void
     {
-        if (array_search($actor, $this->actors) === true) {
-            unset($this->actors, $actor);
+        if (($key = array_search($actor, $this->actors)) !== false) {
+            unset($this->actors[$key]);
         }
     }
 }

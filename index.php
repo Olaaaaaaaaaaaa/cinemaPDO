@@ -11,19 +11,31 @@ use App\Repository\MovieRepository;
 
 <?php
 
-$actor = new Actor();
-$actor->setFirstName("Oui");
-$actor->setLastName("Non");
+$actorRepository = new ActorRepository();
 
-$joker = new Movie();
-$joker->addActor($actor);
+$move = new MovieRepository();
 
-$movie = new MovieRepository();
+$date = new DateTime();
+$date->setDate(2006, 02, 06);
+
+$cars = new MovieRepository();
+$cars = $cars->findOneById(13);
+
+$jane = $actorRepository->findOneById(2);
+$robert = $actorRepository->findOneById(8);
+$sophia = $actorRepository->findOneById(5);
+
+$fast = $move->findOneById(5);
 
 
+$cars->addActor($jane);
+$cars->addActor($robert);
+$cars->addActor($sophia);
 
-dump($movie->findOneById(5));
+dump($cars);
+// $move->addActorsToMovie($cars);
 
+// $move->deleteMovie($fast);
 
 // foreach ($dataMovie->findAll() as $key => $value) {
 //     $newMovie = new Movie();
