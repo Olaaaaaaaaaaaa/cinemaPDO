@@ -2,22 +2,26 @@
 
 namespace App\Models;
 
-use Datetime;
-
 #[\AllowDynamicProperties]
 class Actor
 {
-    private string $firstName;
+    private int $id;
+
+    private ?string $firstName;
+
     private string $lastName;
 
-    public function getFirstName(): string
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function getFirstName(): ?string
     {
         return $this->firstName;
     }
-    /**
-     * @param string $firstName
-     */
-    public function setFirstName(string $firstName): void
+
+    public function setFirstName(?string $firstName): void
     {
         $this->firstName = $firstName;
     }
@@ -26,9 +30,7 @@ class Actor
     {
         return $this->lastName;
     }
-    /**
-     * @param string $lastName
-     */
+
     public function setLastName(string $lastName): void
     {
         $this->lastName = $lastName;

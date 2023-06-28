@@ -1,6 +1,8 @@
 <?php
 include_once __DIR__ . '/component/header.php';
 
+use App\Models\Actor;
+use App\Models\Movie;
 use App\Repository\ActorRepository;
 use App\Service\PDOService;
 use App\Repository\MovieRepository;
@@ -9,15 +11,19 @@ use App\Repository\MovieRepository;
 
 <?php
 
-$dataMovie = new PDOService;
-$test = new ActorRepository;
-// $listMovie = [];
+$actor = new Actor();
+$actor->setFirstName("Oui");
+$actor->setLastName("Non");
 
-dump($dataMovie);
+$joker = new Movie();
+$joker->addActor($actor);
 
-dump($test->findFirst());
+$movie = new MovieRepository();
 
-dump($test->findAllActor());
+
+
+dump($movie->findOneById(5));
+
 
 // foreach ($dataMovie->findAll() as $key => $value) {
 //     $newMovie = new Movie();

@@ -6,51 +6,27 @@ use App\Models\Actor;
 use App\Service\PDOService;
 use PDO;
 
-
 class ActorRepository
 {
-    protected PDOService $pdoService;
-    private string $selectAll = "SELECT * FROM actor";
-    private array $actors = [];
-
+    private PDOService $PDOService;
+    private string $queryAll = 'SELECT * FROM actor';
 
     public function __construct()
     {
-        $this->pdoService = new PDOService();
+        $this->PDOService = new PDOService();
     }
 
-
-    public function findAllActor()
+    public function findAll(): array
     {
-        return $this->pdoService->getPDO()->query($this->selectAll)->fetchAll();
-    }
-    public function findFirst(): Actor
-    {
-        return $this->pdoService->getPDO()->query($this->selectAll)->fetchObject(Actor::class);
+        return $this->PDOService->getPDO()->query($this->queryAll)->fetchAll(PDO::FETCH_CLASS, Actor::class);
     }
 
-    public function findAllModelActor(): array
+    public function findOneById(int $id): Actor|bool
     {
-        return $this->pdoService->getPDO()->query($this->selectAll)->fetchAll(PDO::FETCH_CLASS, Actor::class);
-    }
-
-    public function findByIdActor(?int $id = null): Actor|bool
-    {
-        $query = $this->pdoService->getPDO()->prepare("SELECT * FROM actor WHERE id = ?");
+        $query = $this->PDOService->getPDO()->prepare('SELECT * FROM actor WHERE id = ?');
         $query->bindValue(1, $id);
         $query->execute();
+
         return $query->fetchObject(Actor::class);
-    }
-
-    public function addActor(Actor $actor): void
-    {
-        $this->actors[] = $actor;
-    }
-
-    public function removeActor(Actor $actor): void
-    {
-        if (array_search($actor, $this->actors) === true) {
-            unset($this->actors, $actor);
-        }
     }
 }
