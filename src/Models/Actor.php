@@ -6,9 +6,7 @@ namespace App\Models;
 class Actor
 {
     private int $id;
-
     private ?string $firstName;
-
     private string $lastName;
 
     public function getId(): int
